@@ -35,15 +35,15 @@ def writePDDLProblem(sim: SatelliteSim, file: str, orbits=5):
         f.write("\n")
         for o in range(orbits):
             for index, target in enumerate(sim.targets):
-                start = target[0] + SatelliteSim.PERIOD * o
-                end = target[1] + SatelliteSim.PERIOD * o
+                start = target[0] + sim.PERIOD * o
+                end = target[1] + sim.PERIOD * o
                 f.write("  (at " + str(round(start, 3)) + " (image_available img" + str(index) + "))\n")
                 f.write("  (at " + str(round(end, 3)) + " (not (image_available img" + str(index) + ")))\n")
         f.write("\n")
         for o in range(orbits):
             for index, target in enumerate(sim.groundStations):
-                start = target[0] + SatelliteSim.PERIOD * o
-                end = target[1] + SatelliteSim.PERIOD * o
+                start = target[0] + sim.PERIOD * o
+                end = target[1] + sim.PERIOD * o
                 f.write("  (at " + str(round(start, 3)) + " (dump_available))\n")
                 f.write("  (at " + str(round(end, 3)) + " (not (dump_available)))\n")
         f.write(")\n")

@@ -37,14 +37,14 @@ class PDDLAgent(AgentInterface):
                 # generate a new plan
                 self.plan_requested = True
                 self.plan_received = False
-                thread = threading.Thread(target=self.generatePlan, args=[sim])
+                thread = threading.Thread(target=self.generatePlan(sim), args=[sim])
                 thread.start()
             return
 
         # the current plan is not started
         if self.plan_start < 0:
-            orbit = math.ceil(sim.sim_time / SatelliteSim.PERIOD)
-            self.plan_start = orbit * SatelliteSim.PERIOD
+            orbit = math.ceil(sim.sim_time / sim.PERIOD)
+            self.plan_start = orbit * sim.PERIOD
             print("({name}) plan will start on orbit {o} at time {t}".format(name=self.name, o=orbit, t=self.plan_start))
 
         # satellite is busy
@@ -55,7 +55,7 @@ class PDDLAgent(AgentInterface):
 
             # prepare current action
             action = (self.current_action[1], self.current_action[2], self.current_action[3])
-
+            print(action)
             # get next action ready
             if len(self.plan) > 0:
                 self.current_action = self.plan.pop(0)
